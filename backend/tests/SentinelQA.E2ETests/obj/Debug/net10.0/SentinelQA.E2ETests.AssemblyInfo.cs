@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SentinelQA.E2ETests")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5603fdd04d735c651e3ace52962e724b7b62c29f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2db4a598fe0d4adb7c5a69586566badc3a0f93d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("SentinelQA.E2ETests")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SentinelQA.E2ETests")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

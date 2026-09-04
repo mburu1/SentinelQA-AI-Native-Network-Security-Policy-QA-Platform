@@ -18,10 +18,4 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\SentinelQA.Domain\SentinelQA.Domain.csproj" />
-    <ProjectReference Include="..\..\src\SentinelQA.Application\SentinelQA.Application.csproj" />
-    <ProjectReference Include="..\..\src\SentinelQA.Policies\SentinelQA.Policies.csproj" />
-  </ItemGroup>
-
 </Project>

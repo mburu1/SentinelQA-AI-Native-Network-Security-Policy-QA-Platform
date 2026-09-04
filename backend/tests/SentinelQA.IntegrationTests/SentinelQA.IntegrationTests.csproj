@@ -18,9 +18,4 @@
     <Using Include="Xunit" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\src\SentinelQA.Api\SentinelQA.Api.csproj" />
-    <ProjectReference Include="..\..\src\SentinelQA.Infrastructure\SentinelQA.Infrastructure.csproj" />
-  </ItemGroup>
-
 </Project>

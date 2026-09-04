@@ -1,46 +1,11 @@
 {
   "version": 4,
   "targets": {
-    "net10.0": {
-      "SentinelQA.Contracts/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/SentinelQA.Contracts.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SentinelQA.Contracts.dll": {}
-        }
-      },
-      "SentinelQA.Domain/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/SentinelQA.Domain.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SentinelQA.Domain.dll": {}
-        }
-      }
-    }
+    "net10.0": {}
   },
-  "libraries": {
-    "SentinelQA.Contracts/1.0.0": {
-      "type": "project",
-      "path": "../SentinelQA.Contracts/SentinelQA.Contracts.csproj",
-      "msbuildProject": "../SentinelQA.Contracts/SentinelQA.Contracts.csproj"
-    },
-    "SentinelQA.Domain/1.0.0": {
-      "type": "project",
-      "path": "../SentinelQA.Domain/SentinelQA.Domain.csproj",
-      "msbuildProject": "../SentinelQA.Domain/SentinelQA.Domain.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net10.0": [
-      "SentinelQA.Contracts >= 1.0.0",
-      "SentinelQA.Domain >= 1.0.0"
-    ]
+    "net10.0": []
   },
   "packageFolders": {
     "C:\\Users\\Mwangi Wa Mburu\\.nuget\\packages\\": {},
@@ -75,14 +40,7 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {
-            "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Contracts\\SentinelQA.Contracts.csproj": {
-              "projectPath": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Contracts\\SentinelQA.Contracts.csproj"
-            },
-            "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Domain\\SentinelQA.Domain.csproj": {
-              "projectPath": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Domain\\SentinelQA.Domain.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

@@ -10,10 +10,4 @@
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SentinelQA.Application\SentinelQA.Application.csproj" />
-    <ProjectReference Include="..\SentinelQA.Infrastructure\SentinelQA.Infrastructure.csproj" />
-    <ProjectReference Include="..\SentinelQA.Contracts\SentinelQA.Contracts.csproj" />
-  </ItemGroup>
-
 </Project>

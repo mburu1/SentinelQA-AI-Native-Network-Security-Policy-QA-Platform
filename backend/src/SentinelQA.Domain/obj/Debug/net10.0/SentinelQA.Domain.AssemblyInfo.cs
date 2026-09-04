@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SentinelQA.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+657444e2dfa4392036c4691a4dbf3b07b5c398b0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2db4a598fe0d4adb7c5a69586566badc3a0f93d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("SentinelQA.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SentinelQA.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -393,54 +393,6 @@
         "build": {
           "build/net8.0/xunit.runner.visualstudio.props": {}
         }
-      },
-      "SentinelQA.Application/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "SentinelQA.Contracts": "1.0.0",
-          "SentinelQA.Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/SentinelQA.Application.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SentinelQA.Application.dll": {}
-        }
-      },
-      "SentinelQA.Contracts/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/SentinelQA.Contracts.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SentinelQA.Contracts.dll": {}
-        }
-      },
-      "SentinelQA.Domain/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "compile": {
-          "bin/placeholder/SentinelQA.Domain.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SentinelQA.Domain.dll": {}
-        }
-      },
-      "SentinelQA.Policies/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v10.0",
-        "dependencies": {
-          "SentinelQA.Contracts": "1.0.0",
-          "SentinelQA.Domain": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/SentinelQA.Policies.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/SentinelQA.Policies.dll": {}
-        }
       }
     }
   },
@@ -951,34 +903,11 @@
         "xunit.runner.visualstudio.3.1.4.nupkg.sha512",
         "xunit.runner.visualstudio.nuspec"
       ]
-    },
-    "SentinelQA.Application/1.0.0": {
-      "type": "project",
-      "path": "../../src/SentinelQA.Application/SentinelQA.Application.csproj",
-      "msbuildProject": "../../src/SentinelQA.Application/SentinelQA.Application.csproj"
-    },
-    "SentinelQA.Contracts/1.0.0": {
-      "type": "project",
-      "path": "../../src/SentinelQA.Contracts/SentinelQA.Contracts.csproj",
-      "msbuildProject": "../../src/SentinelQA.Contracts/SentinelQA.Contracts.csproj"
-    },
-    "SentinelQA.Domain/1.0.0": {
-      "type": "project",
-      "path": "../../src/SentinelQA.Domain/SentinelQA.Domain.csproj",
-      "msbuildProject": "../../src/SentinelQA.Domain/SentinelQA.Domain.csproj"
-    },
-    "SentinelQA.Policies/1.0.0": {
-      "type": "project",
-      "path": "../../src/SentinelQA.Policies/SentinelQA.Policies.csproj",
-      "msbuildProject": "../../src/SentinelQA.Policies/SentinelQA.Policies.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net10.0": [
       "Microsoft.NET.Test.Sdk >= 17.14.1",
-      "SentinelQA.Application >= 1.0.0",
-      "SentinelQA.Domain >= 1.0.0",
-      "SentinelQA.Policies >= 1.0.0",
       "coverlet.collector >= 6.0.4",
       "xunit >= 2.9.3",
       "xunit.runner.visualstudio >= 3.1.4"
@@ -1017,17 +946,7 @@
         "net10.0": {
           "framework": "net10.0",
           "targetAlias": "net10.0",
-          "projectReferences": {
-            "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Application\\SentinelQA.Application.csproj": {
-              "projectPath": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Application\\SentinelQA.Application.csproj"
-            },
-            "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Domain\\SentinelQA.Domain.csproj": {
-              "projectPath": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Domain\\SentinelQA.Domain.csproj"
-            },
-            "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Policies\\SentinelQA.Policies.csproj": {
-              "projectPath": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Policies\\SentinelQA.Policies.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {
