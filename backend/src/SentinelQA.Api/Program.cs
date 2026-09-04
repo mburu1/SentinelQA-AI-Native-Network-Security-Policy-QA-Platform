@@ -1,21 +1,140 @@
+using System.Text;
+using System.Threading.RateLimiting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Scalar.AspNetCore;
+using SentinelQA.Api.Authorization;
+using SentinelQA.Api.Filters;
+using SentinelQA.Api.Infrastructure;
+using SentinelQA.Api.Middleware;
+using SentinelQA.Application;
+using SentinelQA.Application.Abstractions;
+using SentinelQA.Infrastructure;
+using Serilog;
+using Modules = SentinelQA.Modules;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// ---------- Serilog ----------
+builder.Host.UseSerilog((context, configuration) =>
+    configuration.ReadFrom.Configuration(context.Configuration));
 
+// ---------- MVC + OpenAPI ----------
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddOpenApi(options =>
+{
+    options.AddDocumentTransformer((document, _, _) =>
+    {
+        document.Info = new Microsoft.OpenApi.Models.OpenApiInfo
+        {
+            Title = "SentinelQA API",
+            Version = "v1",
+            Description = "AI-native network security policy & QA platform."
+        };
+        return Task.CompletedTask;
+    });
+});
+
+// ---------- Clean Architecture wiring ----------
+builder.Services.AddApplication(
+    typeof(Modules.Identity.DependencyInjection).Assembly,
+    typeof(Modules.Tenants.DependencyInjection).Assembly,
+    typeof(Modules.Firewalls.DependencyInjection).Assembly,
+    typeof(Modules.Networks.DependencyInjection).Assembly,
+    typeof(Modules.Policies.DependencyInjection).Assembly,
+    typeof(Modules.ChangeManagement.DependencyInjection).Assembly,
+    typeof(Modules.Testing.DependencyInjection).Assembly,
+    typeof(Modules.Defects.DependencyInjection).Assembly,
+    typeof(Modules.Notifications.DependencyInjection).Assembly,
+    typeof(Modules.Audit.DependencyInjection).Assembly,
+    typeof(Modules.Ai.DependencyInjection).Assembly);
+
+builder.Services.AddInfrastructure(builder.Configuration);
+
+builder.Services.AddIdentityModule();
+builder.Services.AddTenantsModule();
+builder.Services.AddFirewallsModule();
+builder.Services.AddNetworksModule();
+builder.Services.AddPoliciesModule();
+builder.Services.AddChangeManagementModule();
+builder.Services.AddTestingModule();
+builder.Services.AddDefectsModule();
+builder.Services.AddNotificationsModule();
+builder.Services.AddAuditModule();
+builder.Services.AddAiModule();
+
+builder.Services.AddScoped<ICurrentUser, HttpCurrentUser>();
+builder.Services.AddScoped<IdempotencyFilter>();
+
+// ---------- Authentication & authorization ----------
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]!)),
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ClockSkew = TimeSpan.FromSeconds(10)
+        };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy(PolicyNames.CanDeployPolicy, p => p.RequireRole(Roles.Admin, Roles.SecurityEngineer));
+    options.AddPolicy(PolicyNames.CanApproveChange, p => p.RequireRole(Roles.Admin, Roles.Approver));
+    options.AddPolicy(PolicyNames.CanManageUsers, p => p.RequireRole(Roles.Admin));
+    options.AddPolicy(PolicyNames.CanRunSecurityTests, p => p.RequireRole(Roles.Admin, Roles.QAEngineer, Roles.SecurityEngineer));
+    options.AddPolicy(PolicyNames.CanViewAuditTrail, p => p.RequireRole(Roles.Admin, Roles.QAEngineer));
+});
+
+// ---------- Rate limiting ----------
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+            _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 300,
+                Window = TimeSpan.FromMinutes(1)
+            }));
+});
+
+// ---------- Health checks ----------
+builder.Services
+    .AddHealthChecks()
+    .AddNpgsql(builder.Configuration.GetConnectionString("Postgres")!, name: "postgresql")
+    .AddRedis(builder.Configuration.GetConnectionString("Redis")!, name: "redis")
+    .AddMongoDb(builder.Configuration.GetConnectionString("Mongo")!, name: "mongodb");
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-}
+// ---------- Pipeline ----------
+app.UseSerilogRequestLogging();
+app.UseMiddleware<CorrelationIdMiddleware>();
+app.UseMiddleware<ExceptionHandlingMiddleware>();
 
+app.UseRateLimiter();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+}
+
 app.Run();
+
+// Exposed for SentinelQA.ApiTests (WebApplicationFactory).
+public partial class Program;

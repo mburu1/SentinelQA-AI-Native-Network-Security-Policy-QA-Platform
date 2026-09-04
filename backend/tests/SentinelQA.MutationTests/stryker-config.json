@@ -1,0 +1,9 @@
+{
+  "stryker-config": {
+    "project": "SentinelQA.Domain.csproj",
+    "solution": "../../backend/SentinelQA.sln",
+    "test-projects": ["../SentinelQA.UnitTests/SentinelQA.UnitTests.csproj"],
+    "thresholds": { "high": 90, "low": 75, "break": 70 },
+    "mutate": ["**/Rules/*.cs", "**/Aggregates/*.cs"]
+  }
+}
