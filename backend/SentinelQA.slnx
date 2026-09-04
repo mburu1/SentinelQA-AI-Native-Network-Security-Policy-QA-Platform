@@ -1,0 +1,26 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SentinelQA.AI/SentinelQA.AI.csproj" />
+    <Project Path="src/SentinelQA.Api/SentinelQA.Api.csproj" />
+    <Project Path="src/SentinelQA.Application/SentinelQA.Application.csproj" />
+    <Project Path="src/SentinelQA.ChangeManagement/SentinelQA.ChangeManagement.csproj" />
+    <Project Path="src/SentinelQA.Contracts/SentinelQA.Contracts.csproj" />
+    <Project Path="src/SentinelQA.Defects/SentinelQA.Defects.csproj" />
+    <Project Path="src/SentinelQA.Domain/SentinelQA.Domain.csproj" />
+    <Project Path="src/SentinelQA.Firewalls/SentinelQA.Firewalls.csproj" />
+    <Project Path="src/SentinelQA.Identity/SentinelQA.Identity.csproj" />
+    <Project Path="src/SentinelQA.Infrastructure/SentinelQA.Infrastructure.csproj" />
+    <Project Path="src/SentinelQA.Notifications/SentinelQA.Notifications.csproj" />
+    <Project Path="src/SentinelQA.Policies/SentinelQA.Policies.csproj" />
+    <Project Path="src/SentinelQA.Tenants/SentinelQA.Tenants.csproj" />
+    <Project Path="src/SentinelQA.Testing/SentinelQA.Testing.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SentinelQA.ApiTests/SentinelQA.ApiTests.csproj" />
+    <Project Path="tests/SentinelQA.ContractTests/SentinelQA.ContractTests.csproj" />
+    <Project Path="tests/SentinelQA.E2ETests/SentinelQA.E2ETests.csproj" />
+    <Project Path="tests/SentinelQA.IntegrationTests/SentinelQA.IntegrationTests.csproj" />
+    <Project Path="tests/SentinelQA.PerformanceTests/SentinelQA.PerformanceTests.csproj" />
+    <Project Path="tests/SentinelQA.UnitTests/SentinelQA.UnitTests.csproj" />
+  </Folder>
+</Solution>

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "LKWwkKG0uYg=",
+  "success": true,
+  "projectFilePath": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Api\\SentinelQA.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Mwangi Wa Mburu\\.nuget\\packages\\microsoft.aspnetcore.openapi\\10.0.11\\microsoft.aspnetcore.openapi.10.0.11.nupkg.sha512",
+    "C:\\Users\\Mwangi Wa Mburu\\.nuget\\packages\\microsoft.openapi\\2.7.5\\microsoft.openapi.2.7.5.nupkg.sha512"
+  ],
+  "logs": []
+}
