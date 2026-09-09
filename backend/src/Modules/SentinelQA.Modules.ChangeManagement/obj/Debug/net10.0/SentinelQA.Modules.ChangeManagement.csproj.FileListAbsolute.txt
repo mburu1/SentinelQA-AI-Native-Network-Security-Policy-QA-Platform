@@ -1,0 +1,6 @@
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\Modules\SentinelQA.Modules.ChangeManagement\obj\Debug\net10.0\SentinelQA.Modules.ChangeManagement.csproj.AssemblyReference.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\Modules\SentinelQA.Modules.ChangeManagement\obj\Debug\net10.0\SentinelQA.Modules.ChangeManagement.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\Modules\SentinelQA.Modules.ChangeManagement\obj\Debug\net10.0\SentinelQA.Modules.ChangeManagement.AssemblyInfoInputs.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\Modules\SentinelQA.Modules.ChangeManagement\obj\Debug\net10.0\SentinelQA.Modules.ChangeManagement.AssemblyInfo.cs
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\Modules\SentinelQA.Modules.ChangeManagement\obj\Debug\net10.0\SentinelQA.Modules.ChangeManagement.csproj.CoreCompileInputs.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\Modules\SentinelQA.Modules.ChangeManagement\obj\Debug\net10.0\SentinelQA.Modules.ChangeManagement.sourcelink.json

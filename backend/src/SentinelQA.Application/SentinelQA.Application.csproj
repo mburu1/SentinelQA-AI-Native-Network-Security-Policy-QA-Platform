@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="*" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="MediatR" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SentinelQA.Domain\SentinelQA.Domain.csproj" />
+    <ProjectReference Include="..\SentinelQA.Contracts\SentinelQA.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

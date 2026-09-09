@@ -53,21 +53,33 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
+            "FluentAssertions": {
+              "target": "Package",
+              "version": "[*, )"
+            },
+            "FluentValidation.DependencyInjectionExtensions": {
+              "target": "Package",
+              "version": "[12.1.1, )"
+            },
             "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[17.14.1, )"
+              "version": "[*, )"
+            },
+            "Microsoft.Playwright": {
+              "target": "Package",
+              "version": "[*, )"
             },
             "coverlet.collector": {
               "target": "Package",
-              "version": "[6.0.4, )"
-            },
-            "xunit": {
-              "target": "Package",
-              "version": "[2.9.3, )"
+              "version": "[*, )"
             },
             "xunit.runner.visualstudio": {
               "target": "Package",
-              "version": "[3.1.4, )"
+              "version": "[*, )"
+            },
+            "xunit.v3": {
+              "target": "Package",
+              "version": "[*, )"
             }
           },
           "imports": [

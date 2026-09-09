@@ -2,6 +2,8 @@ using System.Text;
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
+using MongoDB.Driver;
 using Scalar.AspNetCore;
 using SentinelQA.Api.Authorization;
 using SentinelQA.Api.Filters;
@@ -10,8 +12,18 @@ using SentinelQA.Api.Middleware;
 using SentinelQA.Application;
 using SentinelQA.Application.Abstractions;
 using SentinelQA.Infrastructure;
+using SentinelQA.Modules.Ai;
+using SentinelQA.Modules.Audit;
+using SentinelQA.Modules.ChangeManagement;
+using SentinelQA.Modules.Defects;
+using SentinelQA.Modules.Firewalls;
+using SentinelQA.Modules.Identity;
+using SentinelQA.Modules.Networks;
+using SentinelQA.Modules.Notifications;
+using SentinelQA.Modules.Policies;
+using SentinelQA.Modules.Tenants;
+using SentinelQA.Modules.Testing;
 using Serilog;
-using Modules = SentinelQA.Modules;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,7 +38,7 @@ builder.Services.AddOpenApi(options =>
 {
     options.AddDocumentTransformer((document, _, _) =>
     {
-        document.Info = new Microsoft.OpenApi.Models.OpenApiInfo
+        document.Info = new OpenApiInfo
         {
             Title = "SentinelQA API",
             Version = "v1",
@@ -38,17 +50,17 @@ builder.Services.AddOpenApi(options =>
 
 // ---------- Clean Architecture wiring ----------
 builder.Services.AddApplication(
-    typeof(Modules.Identity.DependencyInjection).Assembly,
-    typeof(Modules.Tenants.DependencyInjection).Assembly,
-    typeof(Modules.Firewalls.DependencyInjection).Assembly,
-    typeof(Modules.Networks.DependencyInjection).Assembly,
-    typeof(Modules.Policies.DependencyInjection).Assembly,
-    typeof(Modules.ChangeManagement.DependencyInjection).Assembly,
-    typeof(Modules.Testing.DependencyInjection).Assembly,
-    typeof(Modules.Defects.DependencyInjection).Assembly,
-    typeof(Modules.Notifications.DependencyInjection).Assembly,
-    typeof(Modules.Audit.DependencyInjection).Assembly,
-    typeof(Modules.Ai.DependencyInjection).Assembly);
+    typeof(SentinelQA.Modules.Identity.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Tenants.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Firewalls.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Networks.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Policies.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.ChangeManagement.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Testing.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Defects.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Notifications.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Audit.DependencyInjection).Assembly,
+    typeof(SentinelQA.Modules.Ai.DependencyInjection).Assembly);
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
@@ -111,9 +123,11 @@ builder.Services.AddRateLimiter(options =>
 // ---------- Health checks ----------
 builder.Services
     .AddHealthChecks()
-    .AddNpgsql(builder.Configuration.GetConnectionString("Postgres")!, name: "postgresql")
+    .AddNpgSql(builder.Configuration.GetConnectionString("Postgres")!, name: "postgresql")
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!, name: "redis")
-    .AddMongoDb(builder.Configuration.GetConnectionString("Mongo")!, name: "mongodb");
+    .AddMongoDb(
+        sp => new MongoClient(builder.Configuration.GetConnectionString("Mongo")!),
+        name: "mongodb");
 
 var app = builder.Build();
 
@@ -121,11 +135,9 @@ var app = builder.Build();
 app.UseSerilogRequestLogging();
 app.UseMiddleware<CorrelationIdMiddleware>();
 app.UseMiddleware<ExceptionHandlingMiddleware>();
-
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 if (app.Environment.IsDevelopment())

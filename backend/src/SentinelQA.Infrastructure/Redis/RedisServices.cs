@@ -12,7 +12,9 @@ public sealed class RedisCacheService(IConnectionMultiplexer redis) : ICacheServ
     public async Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken = default)
     {
         var value = await Db.StringGetAsync(key);
-        return value.HasValue ? System.Text.Json.JsonSerializer.Deserialize<T>(value!) : default;
+        return value.HasValue
+            ? System.Text.Json.JsonSerializer.Deserialize<T>((string)value!)
+            : default;
     }
 
     public async Task SetAsync<T>(string key, T value, TimeSpan ttl, CancellationToken cancellationToken = default) =>

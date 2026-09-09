@@ -1,5 +1,10 @@
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using SentinelQA.Infrastructure.Persistence;
+using SentinelQA.Infrastructure.Persistence.Outbox;
 using Testcontainers.PostgreSql;
 using Xunit;
 
@@ -14,14 +19,19 @@ public sealed class PostgresFixture : IAsyncLifetime
 
     public string ConnectionString => _postgres.GetConnectionString();
 
-    public async Task InitializeAsync()
+    // FIX 1: xUnit v3 requires ValueTask instead of Task for IAsyncLifetime
+    public async ValueTask InitializeAsync()
     {
         await _postgres.StartAsync();
         await using var context = CreateContext();
         await context.Database.EnsureCreatedAsync();
     }
 
-    public async Task DisposeAsync() => await _postgres.DisposeAsync();
+    // FIX 1: xUnit v3 requires ValueTask instead of Task for IAsyncDisposable
+    public async ValueTask DisposeAsync()
+    {
+        await _postgres.DisposeAsync();
+    }
 
     public ApplicationDbContext CreateContext()
     {
@@ -29,11 +39,15 @@ public sealed class PostgresFixture : IAsyncLifetime
             .UseNpgsql(ConnectionString)
             .Options;
 
-        // MediatR + mapper are only needed for event dispatch; null-safe stubs keep tests focused.
-        return new ApplicationDbContext(options, new NoOpMediator(), new NoOpEventMapper());
+        // FIX 2: IntegrationEventMapper is sealed, so we instantiate it directly 
+        // instead of trying to inherit from it via NoOpEventMapper.
+        var mapper = new IntegrationEventMapper(new NullCorrelationContextAccessor());
+
+        return new ApplicationDbContext(options, new NoOpMediator(), mapper);
     }
 }
 
+// FIX 3: MediatR v12+ requires implementing IPublisher's generic Publish method
 internal sealed class NoOpMediator : MediatR.IMediator
 {
     public IAsyncEnumerable<TResponse> CreateStream<TResponse>(MediatR.IStreamRequest<TResponse> request, CancellationToken cancellationToken = default) =>
@@ -43,6 +57,10 @@ internal sealed class NoOpMediator : MediatR.IMediator
         throw new NotSupportedException();
 
     public Task Publish(object notification, CancellationToken cancellationToken = default) => Task.CompletedTask;
+
+    // Added missing generic Publish method required by IPublisher
+    public Task Publish<TNotification>(TNotification notification, CancellationToken cancellationToken = default)
+        where TNotification : MediatR.INotification => Task.CompletedTask;
 
     public Task<TResponse> Send<TResponse>(MediatR.IRequest<TResponse> request, CancellationToken cancellationToken = default) =>
         throw new NotSupportedException();
@@ -54,14 +72,10 @@ internal sealed class NoOpMediator : MediatR.IMediator
         Task.CompletedTask;
 }
 
-internal sealed class NoOpEventMapper : SentinelQA.Infrastructure.Persistence.Outbox.IntegrationEventMapper
+// Helper class to satisfy IntegrationEventMapper's constructor
+internal sealed class NullCorrelationContextAccessor : ICorrelationContextAccessor
 {
-    public NoOpEventMapper() : base(new NullCorrelation()) { }
-
-    private sealed class NullCorrelation : SentinelQA.Infrastructure.Persistence.Outbox.ICorrelationContextAccessor
-    {
-        public Guid CorrelationId => Guid.Empty;
-    }
+    public Guid CorrelationId => Guid.Empty;
 }
 
 [CollectionDefinition("postgres")]

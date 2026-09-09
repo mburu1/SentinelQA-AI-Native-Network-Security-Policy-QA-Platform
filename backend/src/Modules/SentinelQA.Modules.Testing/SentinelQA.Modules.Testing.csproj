@@ -6,4 +6,25 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="*" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="*" />
+    <PackageReference Include="MediatR" Version="*" />
+  </ItemGroup>
+
+	<!-- Add these Project References -->
+	<ItemGroup>
+		<!-- Resolves CommandHandlerBase<>, IDocumentStore, and potentially IAssistantProvider -->
+		<ProjectReference Include="..\..\SentinelQA.Application\SentinelQA.Application.csproj" />
+
+		<!-- Resolves SentinelQA.Contracts namespace and AnalyzeFailureWithAiCommand -->
+		<ProjectReference Include="..\..\SentinelQA.Contracts\SentinelQA.Contracts.csproj" />
+
+		<!-- Resolves Domain entities, value objects, and AiAnalysisDocument -->
+		<ProjectReference Include="..\..\SentinelQA.Domain\SentinelQA.Domain.csproj" />
+
+		<!-- Optional: Only add if IAssistantProvider is isolated in its own AI module rather than Application/Domain -->
+		<!-- <ProjectReference Include="..\SentinelQA.AI\SentinelQA.AI.csproj" /> -->
+	</ItemGroup>	
+
 </Project>

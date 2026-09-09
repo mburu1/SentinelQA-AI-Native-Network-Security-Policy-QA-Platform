@@ -42,7 +42,7 @@ public sealed class RabbitMqCommandConsumer(
             };
 
             await channel.ExchangeDeclareAsync($"{RabbitMqRouting.Exchange}.dlx", ExchangeType.Fanout, durable: true, cancellationToken: stoppingToken);
-            await channel.QueueDeclareAsync(queue, durable: true, exclusive: false, autoDelete: false, arguments, stoppingToken);
+            await channel.QueueDeclareAsync(queue, durable: true, exclusive: false, autoDelete: false, arguments, cancellationToken: stoppingToken);
             await channel.QueueBindAsync(queue, RabbitMqRouting.Exchange, queue, cancellationToken: stoppingToken);
         }
 

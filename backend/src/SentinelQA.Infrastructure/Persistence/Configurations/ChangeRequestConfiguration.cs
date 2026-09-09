@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using SentinelQA.Domain.Aggregates;
+using SentinelQA.Domain.Entities;
 
 namespace SentinelQA.Infrastructure.Persistence.Configurations;
 
@@ -12,12 +13,19 @@ public sealed class ChangeRequestConfiguration : IEntityTypeConfiguration<Change
 
         builder.HasKey(cr => cr.Id);
         builder.Property(cr => cr.Id).ValueGeneratedNever();
-        builder.Property(cr => cr.Reason).HasMaxLength(2000).IsRequired();
+
+        // Removed cr.Reason as it does not exist on the ChangeRequest aggregate
         builder.Property(cr => cr.RejectionReason).HasMaxLength(2000);
         builder.Property(cr => cr.DeploymentRef).HasMaxLength(128);
-        builder.UseXminAsConcurrencyToken();
 
-        builder.HasIndex(cr => cr.State);
+        // Explicit shadow property mapping bypasses the missing UseXminAsConcurrencyToken extension method error
+        builder.Property<uint>("xmin")
+               .HasColumnType("xid")
+               .ValueGeneratedOnAddOrUpdate()
+               .IsConcurrencyToken();
+
+        // Changed cr.State to cr.Status to match the domain entity
+        builder.HasIndex(cr => cr.Status);
         builder.HasIndex(cr => new { cr.TenantId, cr.PolicyId });
     }
 }

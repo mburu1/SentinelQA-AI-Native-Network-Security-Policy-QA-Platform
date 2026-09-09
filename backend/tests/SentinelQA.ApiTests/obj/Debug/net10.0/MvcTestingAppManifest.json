@@ -1,0 +1,7 @@
+{
+  "SentinelQA.Api": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Api",
+  "SentinelQA.Application": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Application",
+  "SentinelQA.Contracts, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Contracts",
+  "SentinelQA.Domain": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Domain",
+  "SentinelQA.Infrastructure": "D:\\Mwangi Wa Mburu\\Coding\\SentinelQA\\backend\\src\\SentinelQA.Infrastructure"
+}

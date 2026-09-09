@@ -8,10 +8,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="coverlet.collector" Version="6.0.4" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="3.1.4" />
+    <PackageReference Include="coverlet.collector" Version="*" />
+    <PackageReference Include="FluentAssertions" Version="*" />
+    <PackageReference Include="MediatR" Version="14.2.0" />
+    <PackageReference Include="MediatR.Contracts" Version="2.0.1" />
+    <PackageReference Include="MediatR.Extensions.FluentValidation.AspNetCore" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.11" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="*" />
+    <PackageReference Include="Npgsql" Version="10.0.3" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="10.0.3" />
+    <PackageReference Include="Testcontainers" Version="*" />
+    <PackageReference Include="Testcontainers.Kafka" Version="*" />
+    <PackageReference Include="Testcontainers.PostgreSql" Version="*" />
+    <PackageReference Include="Testcontainers.RabbitMq" Version="*" />
+    <PackageReference Include="Testcontainers.Redis" Version="*" />
+    <PackageReference Include="WireMock.Net" Version="*" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="*" />
+    <PackageReference Include="xunit.v3" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\SentinelQA.Infrastructure\SentinelQA.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>

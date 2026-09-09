@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SentinelQA.Application.Abstractions.Persistence;
 using SentinelQA.Domain.Aggregates;
+using SentinelQA.Domain.Entities;
 
 namespace SentinelQA.Infrastructure.Persistence.Repositories;
 

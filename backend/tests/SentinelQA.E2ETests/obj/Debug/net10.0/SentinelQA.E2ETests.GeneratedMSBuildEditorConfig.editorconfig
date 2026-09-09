@@ -1,4 +1,6 @@
 is_global = true
+build_property.MSBuildProjectFullPath = D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\tests\SentinelQA.E2ETests\SentinelQA.E2ETests.csproj
+build_property.XunitTestProjectAOT = false
 build_property.TargetFramework = net10.0
 build_property.TargetFrameworkIdentifier = .NETCoreApp
 build_property.TargetFrameworkVersion = v10.0

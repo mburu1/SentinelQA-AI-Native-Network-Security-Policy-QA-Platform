@@ -14,12 +14,14 @@ internal sealed class GenerateTestScenariosCommandHandler(
 {
     public async Task<GenerateTestScenariosResult> Handle(GenerateTestScenariosCommand request, CancellationToken cancellationToken)
     {
-        var prompt = $"""
+        // $$""" allows single '{' and '}' to be literal text (perfect for JSON).
+        // We use '{{' and '}}' to interpolate the request.Requirement variable.
+        var prompt = $$"""
             You are a senior network-security QA engineer. Generate test scenarios for this requirement
-            as JSON: {{ "scenarios": [ {{ "title": "...", "type": "positive|negative|boundary|security", "expected": "..." }} ] }}
-
+            as JSON: { "scenarios": [ { "title": "...", "type": "positive|negative|boundary|security", "expected": "..." } ] }
+            
             Requirement:
-            {request.Requirement}
+            {{request.Requirement}}
             """;
 
         var response = await assistant.GenerateAsync(prompt, cancellationToken);
@@ -43,7 +45,6 @@ internal sealed class GenerateTestScenariosCommandHandler(
         try
         {
             using var document = JsonDocument.Parse(rawOutput);
-
             return document.RootElement
                 .GetProperty("scenarios")
                 .EnumerateArray()

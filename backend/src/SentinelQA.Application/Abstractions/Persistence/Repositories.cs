@@ -1,4 +1,8 @@
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using SentinelQA.Domain.Aggregates;
+using SentinelQA.Domain.Entities; // Added to resolve CS0246 for ChangeRequest, TestRun, etc.
 
 namespace SentinelQA.Application.Abstractions.Persistence;
 

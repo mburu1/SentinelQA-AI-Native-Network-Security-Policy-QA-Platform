@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
+using System.Collections.Generic;
 using Testcontainers.PostgreSql;
 using Xunit;
 
@@ -26,7 +28,15 @@ public sealed class SentinelApiFactory : WebApplicationFactory<Program>, IAsyncL
         });
     }
 
-    public async Task InitializeAsync() => await _postgres.StartAsync();
+    // FIX: xUnit v3 requires ValueTask instead of Task
+    public async ValueTask InitializeAsync()
+    {
+        await _postgres.StartAsync();
+    }
 
-    async Task IAsyncLifetime.DisposeAsync() => await _postgres.DisposeAsync();
+    // FIX: Removed explicit interface declaration and changed to ValueTask
+    public async ValueTask DisposeAsync()
+    {
+        await _postgres.DisposeAsync();
+    }
 }

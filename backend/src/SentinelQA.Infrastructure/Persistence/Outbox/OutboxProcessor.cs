@@ -7,6 +7,8 @@ using Microsoft.Extensions.Options;
 using SentinelQA.Contracts.Messaging;
 using SentinelQA.Infrastructure.Common;
 using SentinelQA.Infrastructure.Messaging.Kafka;
+using SentinelQA.Infrastructure.Messaging;
+//using SentinelQA.Infrastructure.Configuration;
 
 namespace SentinelQA.Infrastructure.Persistence.Outbox;
 

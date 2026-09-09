@@ -1,0 +1,14 @@
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.csproj.AssemblyReference.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.AssemblyInfoInputs.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.AssemblyInfo.cs
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.csproj.CoreCompileInputs.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.sourcelink.json
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\bin\Debug\net10.0\SentinelQA.Domain.deps.json
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\bin\Debug\net10.0\SentinelQA.Domain.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\bin\Debug\net10.0\SentinelQA.Domain.pdb
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\refint\SentinelQA.Domain.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\SentinelQA.Domain.pdb
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\ref\SentinelQA.Domain.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Domain\obj\Debug\net10.0\Sentinel.9A2C38E5.Up2Date

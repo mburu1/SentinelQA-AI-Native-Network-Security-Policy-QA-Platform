@@ -7,7 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="14.2.0" />
+    <PackageReference Include="FluentValidation" Version="*" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="*" />
+    <PackageReference Include="MediatR" Version="*" />
   </ItemGroup>
+  
+  <ItemGroup>
+  <!-- Adjust the relative path if your folder structure differs slightly -->
+  <ProjectReference Include="..\..\SentinelQA.Application\SentinelQA.Application.csproj" />
+  <ProjectReference Include="..\..\SentinelQA.Domain\SentinelQA.Domain.csproj" />
+  <ProjectReference Include="..\..\SentinelQA.Contracts\SentinelQA.Contracts.csproj" />
+</ItemGroup>
 
 </Project>

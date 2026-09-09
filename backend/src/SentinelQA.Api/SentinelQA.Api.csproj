@@ -7,7 +7,43 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.11" />
+    <PackageReference Include="AspNetCore.HealthChecks.MongoDb" Version="*" />
+    <PackageReference Include="AspNetCore.HealthChecks.Npgsql" Version="*" />
+    <PackageReference Include="AspNetCore.HealthChecks.Redis" Version="*" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="*" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="*" />
+    <PackageReference Include="Microsoft.OpenApi" Version="3.10.2" />
+    <PackageReference Include="MongoDB.Driver" Version="3.11.1" />
+    <PackageReference Include="Npgsql.OpenTelemetry" Version="*" />
+    <PackageReference Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="*" />
+    <PackageReference Include="OpenTelemetry.Extensions.Hosting" Version="*" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AspNetCore" Version="*" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="*" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.Runtime" Version="*" />
+    <PackageReference Include="Scalar.AspNetCore" Version="*" />
+    <PackageReference Include="Serilog.AspNetCore" Version="*" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\tests\SentinelQA.MutationTests\SentinelQA.MutationTests.csproj" />
+    <ProjectReference Include="..\..\tests\SentinelQA.PerformanceTests\SentinelQA.PerformanceTests.csproj" />
+    <ProjectReference Include="..\..\tests\SentinelQA.UnitTests\SentinelQA.UnitTests.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Ai\SentinelQA.Modules.Ai.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Audit\SentinelQA.Modules.Audit.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.ChangeManagement\SentinelQA.Modules.ChangeManagement.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Defects\SentinelQA.Modules.Defects.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Firewalls\SentinelQA.Modules.Firewalls.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Identity\SentinelQA.Modules.Identity.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Networks\SentinelQA.Modules.Networks.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Notifications\SentinelQA.Modules.Notifications.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Policies\SentinelQA.Modules.Policies.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Tenants\SentinelQA.Modules.Tenants.csproj" />
+    <ProjectReference Include="..\Modules\SentinelQA.Modules.Testing\SentinelQA.Modules.Testing.csproj" />
+    <ProjectReference Include="..\SentinelQA.Application\SentinelQA.Application.csproj" />
+    <ProjectReference Include="..\SentinelQA.Infrastructure\SentinelQA.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

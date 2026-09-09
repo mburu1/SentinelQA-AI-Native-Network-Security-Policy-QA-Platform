@@ -1,5 +1,6 @@
 using MediatR;
 using SentinelQA.Application.Abstractions;
+using SentinelQA.Application.Abstractions.Messaging;
 using SentinelQA.Application.Abstractions.Persistence;
 using SentinelQA.Domain.Aggregates;
 using SentinelQA.Domain.Events;
@@ -12,7 +13,12 @@ internal sealed class AuditWriter(
     ICurrentUser currentUser,
     ICorrelationContext correlation)
 {
-    public async Task WriteAsync(Guid tenantId, string action, string entityType, string entityId, CancellationToken cancellationToken)
+    public async Task WriteAsync(
+        Guid tenantId,
+        string action,
+        string entityType,
+        string entityId,
+        CancellationToken cancellationToken)
     {
         var entry = AuditEntry.Record(
             tenantId,
@@ -27,32 +33,62 @@ internal sealed class AuditWriter(
     }
 }
 
-internal sealed class AuditPolicyCreated(AuditWriter writer) : INotificationHandler<PolicyCreated>
+internal sealed class AuditPolicyCreated(AuditWriter writer)
+    : INotificationHandler<DomainEventNotification<PolicyCreated>>
 {
-    public Task Handle(PolicyCreated notification, CancellationToken cancellationToken) =>
-        writer.WriteAsync(notification.TenantId, "PolicyCreated", "Policy", notification.PolicyId.ToString(), cancellationToken);
+    public Task Handle(DomainEventNotification<PolicyCreated> notification, CancellationToken cancellationToken) =>
+        writer.WriteAsync(
+            notification.DomainEvent.TenantId,
+            "PolicyCreated",
+            "Policy",
+            notification.DomainEvent.PolicyId.ToString(),
+            cancellationToken);
 }
 
-internal sealed class AuditChangeRequestSubmitted(AuditWriter writer) : INotificationHandler<ChangeRequestSubmitted>
+internal sealed class AuditChangeRequestSubmitted(AuditWriter writer)
+    : INotificationHandler<DomainEventNotification<ChangeRequestSubmitted>>
 {
-    public Task Handle(ChangeRequestSubmitted notification, CancellationToken cancellationToken) =>
-        writer.WriteAsync(notification.TenantId, "ChangeRequestSubmitted", "ChangeRequest", notification.ChangeRequestId.ToString(), cancellationToken);
+    public Task Handle(DomainEventNotification<ChangeRequestSubmitted> notification, CancellationToken cancellationToken) =>
+        writer.WriteAsync(
+            notification.DomainEvent.TenantId,
+            "ChangeRequestSubmitted",
+            "ChangeRequest",
+            notification.DomainEvent.ChangeRequestId.ToString(),
+            cancellationToken);
 }
 
-internal sealed class AuditChangeRequestApproved(AuditWriter writer) : INotificationHandler<ChangeRequestApproved>
+internal sealed class AuditChangeRequestApproved(AuditWriter writer)
+    : INotificationHandler<DomainEventNotification<ChangeRequestApproved>>
 {
-    public Task Handle(ChangeRequestApproved notification, CancellationToken cancellationToken) =>
-        writer.WriteAsync(notification.TenantId, "ChangeRequestApproved", "ChangeRequest", notification.ChangeRequestId.ToString(), cancellationToken);
+    public Task Handle(DomainEventNotification<ChangeRequestApproved> notification, CancellationToken cancellationToken) =>
+        writer.WriteAsync(
+            notification.DomainEvent.TenantId,
+            "ChangeRequestApproved",
+            "ChangeRequest",
+            notification.DomainEvent.ChangeRequestId.ToString(),
+            cancellationToken);
 }
 
-internal sealed class AuditDeploymentCompleted(AuditWriter writer) : INotificationHandler<DeploymentCompleted>
+internal sealed class AuditDeploymentCompleted(AuditWriter writer)
+    : INotificationHandler<DomainEventNotification<DeploymentCompleted>>
 {
-    public Task Handle(DeploymentCompleted notification, CancellationToken cancellationToken) =>
-        writer.WriteAsync(notification.TenantId, "DeploymentCompleted", "ChangeRequest", notification.ChangeRequestId.ToString(), cancellationToken);
+    public Task Handle(DomainEventNotification<DeploymentCompleted> notification, CancellationToken cancellationToken) =>
+        writer.WriteAsync(
+            notification.DomainEvent.TenantId,
+            "DeploymentCompleted",
+            "ChangeRequest",
+            notification.DomainEvent.ChangeRequestId.ToString(),
+            cancellationToken);
 }
 
-internal sealed class AuditDefectCreated(AuditWriter writer) : INotificationHandler<DefectCreated>
+internal sealed class AuditDefectCreated(AuditWriter writer)
+    : INotificationHandler<DomainEventNotification<DefectCreated>>
 {
-    public Task Handle(DefectCreated notification, CancellationToken cancellationToken) =>
-        writer.WriteAsync(notification.TenantId, "DefectCreated", "Defect", notification.DefectId.ToString(), cancellationToken);
+    public Task Handle(DomainEventNotification<DefectCreated> notification, CancellationToken cancellationToken) =>
+        writer.WriteAsync(
+            notification.DomainEvent.TenantId,
+            "DefectCreated",
+            "Defect",
+            notification.DomainEvent.DefectId.ToString(),
+            cancellationToken);
 }

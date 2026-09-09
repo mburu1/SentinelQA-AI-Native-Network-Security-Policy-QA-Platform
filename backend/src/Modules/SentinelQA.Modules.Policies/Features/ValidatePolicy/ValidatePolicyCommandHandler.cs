@@ -4,7 +4,6 @@ using SentinelQA.Application.Abstractions;
 using SentinelQA.Application.Abstractions.Persistence;
 using SentinelQA.Application.Common;
 using SentinelQA.Domain.Entities;
-using SentinelQA.Domain.Events;
 using SentinelQA.Domain.Rules;
 using SentinelQA.Infrastructure.Common;
 
@@ -13,6 +12,7 @@ namespace SentinelQA.Modules.Policies.Features.ValidatePolicy;
 internal sealed class ValidatePolicyCommandHandler(
     IPolicyRepository policies,
     IUnitOfWork unitOfWork,
+    IValidationResultStore results, // FIX 1: Properly inject the store
     PolicyAnalyzer analyzer) : IRequestHandler<ValidatePolicyCommand, ValidatePolicyResult>
 {
     public async Task<ValidatePolicyResult> Handle(ValidatePolicyCommand request, CancellationToken cancellationToken)
@@ -21,8 +21,6 @@ internal sealed class ValidatePolicyCommandHandler(
             ?? throw new NotFoundException($"Policy '{request.PolicyId}' was not found.");
 
         var result = analyzer.Analyze([.. policy.Rules]);
-
-        policy.GetType(); // no-op guard to keep the aggregate explicitly in scope
 
         if (result.IsValid)
             policy.RecordValidationPassed();
@@ -36,22 +34,16 @@ internal sealed class ValidatePolicyCommandHandler(
             result.CountBySeverity(FindingSeverity.Critical),
             JsonSerializer.Serialize(result.Findings, JsonDefaults.Options));
 
-        await using (unitOfWork as IDisposable) { } // scope marker; DbContext tracks the new entity below via repository-free Add
-        await AddValidationResultAsync(snapshot, cancellationToken);
+        // FIX 2: Use the injected store directly. 
+        // No manual disposal of unitOfWork! The DI container handles it.
+        await results.AddAsync(snapshot, cancellationToken);
 
-        // Raise the domain event manually on the aggregate-equivalent boundary.
+        // SaveChangesAsync commits both the aggregate state change (RecordValidationPassed) 
+        // and the new validation snapshot in a single transaction.
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
         return new ValidatePolicyResult(policy.Id, result.IsValid, result.HasCritical, result.Findings);
     }
-
-    private async Task AddValidationResultAsync(PolicyValidationResult snapshot, CancellationToken cancellationToken)
-    {
-        // The DbContext exposes PolicyValidationResults; routed through a small local repository accessor.
-        await _results.AddAsync(snapshot, cancellationToken);
-    }
-
-    private readonly IValidationResultStore _results = null!;
 }
 
 /// <summary>Abstraction so the module never touches DbContext directly.</summary>

@@ -12,13 +12,13 @@ internal sealed class AnalyzeFailureWithAiCommandHandler(
 {
     public override async Task HandleAsync(AnalyzeFailureWithAiCommand command, CancellationToken cancellationToken)
     {
-        var prompt = $"""
-            You are a senior QA engineer. Analyze this automated test failure and respond with JSON:
-            {{ "likelyRootCause": "...", "suggestedReproduction": "...", "suggestedSeverity": "...", "confidence": 0.0 }}
+        var prompt = $$"""
+        You are a senior QA engineer. Analyze this automated test failure and respond with JSON:
+        { "likelyRootCause": "...", "suggestedReproduction": "...", "suggestedSeverity": "...", "confidence": 0.0 }
 
-            Failure summary:
-            {command.FailureSummary}
-            """;
+        Failure summary:
+        {{command.FailureSummary}}
+        """;
 
         var response = await assistant.GenerateAsync(prompt, cancellationToken);
 

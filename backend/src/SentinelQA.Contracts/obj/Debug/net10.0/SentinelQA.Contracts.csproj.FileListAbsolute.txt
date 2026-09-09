@@ -1,0 +1,14 @@
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\bin\Debug\net10.0\SentinelQA.Contracts.deps.json
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\bin\Debug\net10.0\SentinelQA.Contracts.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\bin\Debug\net10.0\SentinelQA.Contracts.pdb
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.AssemblyInfoInputs.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.AssemblyInfo.cs
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.csproj.CoreCompileInputs.cache
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.sourcelink.json
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\refint\SentinelQA.Contracts.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.pdb
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\ref\SentinelQA.Contracts.dll
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\Sentinel.F52EC3CD.Up2Date
+D:\Mwangi Wa Mburu\Coding\SentinelQA\backend\src\SentinelQA.Contracts\obj\Debug\net10.0\SentinelQA.Contracts.csproj.AssemblyReference.cache
